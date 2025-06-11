@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './App.css';
 
 function checkWinner(board) {
   const lines = [
@@ -73,21 +74,27 @@ function App() {
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div className="App">
       <h1>Tic-Tac-Toe</h1>
       {winner ? (
         <h2>{winner} wins!</h2>
       ) : (
         <h2>Turn: {turn}</h2>
       )}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 60px)', gap: '5px', margin: '20px auto', width: 'max-content' }}>
+      <div className="board">
         {board.map((cell, i) => (
-          <button key={i} onClick={() => handleClick(i)} style={{ height: '60px', width: '60px', fontSize: '24px' }}>
+          <button
+            key={i}
+            onClick={() => handleClick(i)}
+            disabled={cell || winner}
+          >
             {cell}
           </button>
         ))}
       </div>
-      <button onClick={resetGame}>Restart</button>
+      <button className="restart-button" onClick={resetGame}>
+        Restart
+      </button>
     </div>
   );
 }
